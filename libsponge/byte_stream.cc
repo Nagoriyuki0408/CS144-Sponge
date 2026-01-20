@@ -14,11 +14,7 @@ using namespace std;
 
 // 声明一个字节流，维护一个capacity大小的窗口
 ByteStream::ByteStream(const size_t capacity)
-    :   _capacity(capacity), 
-        _byteslist(), 
-        is_ended(false), 
-        _bytes_written(0), 
-        _bytes_read(0) {}
+    : _capacity(capacity), _byteslist(), is_ended(false), _bytes_written(0), _bytes_read(0) {}
 
 size_t ByteStream::write(const string &data) {
     size_t i = 0;
@@ -46,7 +42,7 @@ string ByteStream::peek_output(const size_t len) const {
 }
 
 //! \param[in] len bytes will be removed from the output side of the buffer
-void ByteStream::pop_output(const size_t len) { 
+void ByteStream::pop_output(const size_t len) {
     for (size_t i = 0; i < len; i++) {
         if (_byteslist.size() > 0) {
             _byteslist.pop_front();
@@ -68,39 +64,27 @@ std::string ByteStream::read(const size_t len) {
             _bytes_read++;
         }
     }
-    end_input();
     return res;
 }
 
 // 这是什么意思，输入端已经结束
-void ByteStream::end_input() {
-    is_ended = true;
-}
+void ByteStream::end_input() { is_ended = true; }
 
 // 这是看writer写入的内容是否完成
-bool ByteStream::input_ended() const {
-    return is_ended;
-}
+bool ByteStream::input_ended() const { return is_ended; }
 
 // 返回当前字节流窗口的大小
-size_t ByteStream::buffer_size() const { 
-    return _byteslist.size();
-}
+size_t ByteStream::buffer_size() const { return _byteslist.size(); }
 
 // 这是看字节流窗口是否为空
-bool ByteStream::buffer_empty() const { 
-    return _byteslist.empty();
-}
+bool ByteStream::buffer_empty() const { return _byteslist.empty(); }
 
 // 查看字节流是否达到了容量
-bool ByteStream::eof() const { 
-    return input_ended() && buffer_empty(); 
-}
+bool ByteStream::eof() const {
+    return input_ended() && buffer_empty(); }
 
 // 返回写入的字节数
-size_t ByteStream::bytes_written() const { 
-    return _bytes_written;
-}
+size_t ByteStream::bytes_written() const { return _bytes_written; }
 
 // 读取的字节数
 size_t ByteStream::bytes_read() const { return _bytes_read; }
