@@ -18,6 +18,7 @@ class StreamReassembler {
     
     std::map<uint64_t, std::string> buffer;  // 暂存乱序片段
     uint64_t _eof_index = 0;
+    bool _eof_seen = false;
 
   public:
     //! \brief Construct a `StreamReassembler` that will store up to `capacity` bytes.

@@ -64,7 +64,6 @@ std::string ByteStream::read(const size_t len) {
             _bytes_read++;
         }
     }
-    end_input();
     return res;
 }
 
